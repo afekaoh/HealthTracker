@@ -1,0 +1,3 @@
+fastapi[standard]
+Pydantic>=2.10.6
+requests

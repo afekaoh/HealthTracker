@@ -6,6 +6,10 @@
 - [x] Create skeleton for API
 - [X] Create SQL Schema
 - [ ] Complete API with CRUD operations for all dbs in the schema
+  - [X] Users
+  - [X] Physical
+  - [X] Blood
+  - [ ] Sleep
 - [ ] Create the get_health_score endpoint
 - [ ] Add Security comments
 - [ ] Test with Mock FE

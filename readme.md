@@ -4,7 +4,9 @@
 
 <b><u>Todo list:</u></b>
 - [x] Create skeleton for API
-- [ ] Create SQL Schema
+- [X] Create SQL Schema
 - [ ] Complete API with CRUD operations for all dbs in the schema
 - [ ] Create the get_health_score endpoint
-- [ ] test with Mock FE
+- [ ] Add Security comments
+- [ ] Test with Mock FE
+- [ ] Final passthrough and refactoring for readability

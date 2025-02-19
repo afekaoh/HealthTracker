@@ -1,8 +1,3 @@
-from datetime import date
-from typing import Annotated, Union
-
-from pydantic import BaseModel, Field, BeforeValidator
-
 """
 Some notes:
 1. For simplicity reasons the app support only one date per user per activity type. (e.g., one physical activity per day)
@@ -12,41 +7,3 @@ Some notes:
 """
 
 
-def validate_date_format(value: str) -> date:
-    try:
-        return date.fromisoformat(value)
-    except ValueError:
-        raise ValueError('Invalid date format. Date should be in the format YYYY-MM-DD')
-
-
-class UserCreate(BaseModel):
-    name: str = Field(title="The name of the user", max_length=30)
-    age: int = Field(title="The age of the user", description='must be above 18', ge=18)
-
-
-class UserPhysical(BaseModel):
-    user_id: int = Field(title="The id of the user", ge=0)
-    steps: int = Field(title="The number of steps the user took in the day", ge=0)
-    cardio_time_session_minutes: Union[int, None] = Field(default=None,
-                                                          title='Cardio training time in minutes')  # Optional field
-    strength_time_session_minutes: Union[int, None] = Field(default=None,
-                                                            title='Strength training time in minutes')  # Optional field
-    session_date: Annotated[date, BeforeValidator(validate_date_format)] = Field(title='The date of the activity')
-
-
-class UserBlood(BaseModel):
-    user_id: int = Field(title="The id of the user", ge=0)
-    RBC: float = Field(title="Red Blood Cell count", ge=0)
-    WBC: float = Field(title="White Blood Cell count", ge=0)
-    glucose_level: float = Field(title="The glucose level in the blood", ge=0)
-    cholesterol_level: float = Field(title="The cholesterol level in the blood", ge=0)
-    triglycerides_level: float = Field(title="The triglycerides level in the blood", ge=0)
-    test_date: Annotated[date, BeforeValidator(validate_date_format)] = Field(title='The date of the blood test')
-
-
-class UserSleep(BaseModel):
-    user_id: int = Field(title="The id of the user", ge=0)
-    sleep_hours: float = Field(title="The number of hours the user slept", ge=0)
-    avg_heart_rate: float = Field(title="The average heart rate during sleep", ge=0)
-    avg_oxygen_level: float = Field(title="The average oxygen level during sleep", ge=0)
-    sleep_date: Annotated[date, BeforeValidator(validate_date_format)] = Field(title='The date of the sleep activity')

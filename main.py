@@ -1,5 +1,3 @@
-from Backend.main_api import app
-
 user_data = [
     {
         'user'             :
@@ -94,25 +92,4 @@ user_data = [
 
 ]
 
-# import requests
-#
-# for user in user_data:
-#     user_data = user['user']
-#     physical_activity = user['physical_activity']
-#     blood_test = user['blood_test']
-#     sleep_activity = user['sleep_activity']
-#
-#     response = requests.post('localhost:8888/users/', data=user_data)
-#     print(response.json()['message'])
-#     id = response.json()['id']
-#     physical_activity['user_id'] = id
-#     blood_test['user_id'] = id
-#     sleep_activity['user_id'] = id
-#     response = requests.post('localhost:8000/physical/', data=physical_activity)
-#     print(response.json()['message'])
-#     response = requests.post('localhost:8000/blood/', data=blood_test)
-#     print(response.json()['message'])
-#     response = requests.post('localhost:8000/sleep/', data=sleep_activity)
-#     print(response.json()['message'])
-#
-#
+

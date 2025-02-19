@@ -9,8 +9,11 @@
   - [X] Users
   - [X] Physical
   - [X] Blood
-  - [ ] Sleep
-- [ ] Create the get_health_score endpoint
+  - [X] Sleep
+- [X] Create the get_health_score endpoint
 - [ ] Add Security comments
-- [ ] Test with Mock FE
+- [ ] Test with pytest
+  - [X] Simple CRUD operations
+  - [ ] Complex CRUD operations
+  - [ ] Health Score
 - [ ] Final passthrough and refactoring for readability

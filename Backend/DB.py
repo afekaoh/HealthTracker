@@ -20,51 +20,46 @@ class User(Base):
 class PhysicalActivity(Base):
     __tablename__ = "physical_activity"
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     steps = Column(Integer, nullable=False)
     cardio_time_session_minutes = Column(Integer, nullable=True)
     strength_time_session_minutes = Column(Integer, nullable=True)
     date = Column(Date,
-                  default=date.today)  # The app support one activity data unit per day. all other data will be added to the same day
+                  default=date.today,
+                  unique=True)  # The app support one activity data unit per day. all other data will be added to the same day
 
 
 class SleepActivity(Base):
     __tablename__ = "sleep_activity"
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     sleep_hours = Column(Float, nullable=False)
     avg_heart_rate = Column(Float, nullable=False)
     avg_oxygen_level = Column(Float, nullable=False)
     date = Column(Date,
                   default=date.today,
-                  nullable=False)  # the app support one sleep per day, the date is the time that the sleep started
+                  nullable=False,
+                  unique=True)  # the app support one sleep per day, the date is the time that the sleep started
 
 
 class BloodTest(Base):
     __tablename__ = "blood_tests"
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     RBC = Column(Float, nullable=False)
     WBC = Column(Float, nullable=False)
     glucose_level = Column(Float, nullable=False)
     cholesterol_level = Column(Float, nullable=False)
     triglycerides_level = Column(Float, nullable=False)
-    date = Column(Date, default=date.today)
+    date = Column(Date, default=date.today, unique=True)
 
 
 Base.metadata.create_all(bind=engine)
 
 
-def get_db() -> Session:
+def get_db():
     db: Session = SessionLocal()
     try:
         yield db
     finally:
         db.close()
-
-
-def delete_all_data(session: Session, user_id: int) -> None:
-    session.query(PhysicalActivity).filter(PhysicalActivity.user_id == user_id).delete()
-    session.query(SleepActivity).filter(SleepActivity.user_id == user_id).delete()
-    session.query(BloodTest).filter(BloodTest.user_id == user_id).delete()
-    session.query(User).filter(User.id == user_id).delete()

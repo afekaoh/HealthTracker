@@ -20,6 +20,7 @@
 - [X] Answer Theoretical Questions
 
 # Notes:
+The code is not user-proof since I took the assignment more as a design challenge than a real API meant for real users.
 This API does not include security measures, as it is intended as a simplified example. Properly implementing security
 features would go beyond the scope of this demonstration and might obscure the core objectives of this example.
 However, in a real-world application, security would be a critical component.

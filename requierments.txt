@@ -1,6 +1,6 @@
 fastapi[standard]
-Pydantic>=2.10.6
 requests
 sqlalchemy
 pandas
 pytest
+python-dotenv
